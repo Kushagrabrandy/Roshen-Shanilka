@@ -97,10 +97,10 @@ const projectsData = [
     emoji: "🚁",
     gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
     gallery: [
-      "/Drone Videos/ssstik.io_1771946919687.mp4",
-      "/Drone Videos/ssstik.io_1771947096752.mp4",
-      "/Drone Videos/ssstik.io_1771947261912.mp4",
-      "/Drone Videos/ssstik.io_1771947314544.mp4"
+      "/drone-videos/ssstik.io_1771946919687.mp4",
+      "/drone-videos/ssstik.io_1771947096752.mp4",
+      "/drone-videos/ssstik.io_1771947261912.mp4",
+      "/drone-videos/ssstik.io_1771947314544.mp4"
     ],
     live: "#", code: "#"
   },
@@ -476,7 +476,7 @@ export default function Portfolio() {
             <div className="avatar-container">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/new image (2).png"
+                src="/new-image-2.png"
                 alt="Roshen Shanilka"
                 className="avatar-img"
                 onError={(e) => {
