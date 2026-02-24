@@ -11,7 +11,8 @@ const projectsData = [
     tags: ["Photoshop", "Illustrator", "Branding"],
     emoji: "🎨",
     gradient: "linear-gradient(135deg, #6c63ff 0%, #3ecfcf 100%)",
-    live: "#", code: "#"
+    image: "/EcoBrand/Cover.png",
+    live: "/EcoBrand/Cover.png", code: "#"
   },
   {
     id: 2, category: "web",
@@ -47,7 +48,8 @@ const projectsData = [
     tags: ["Adobe InDesign", "Photoshop", "Typography"],
     emoji: "📚",
     gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-    live: "#", code: "#"
+    image: "/EcoBrand/Book Front Cover 1 of 1.png",
+    live: "/EcoBrand/Book Front Cover 1 of 1.png", code: "#"
   },
   {
     id: 6, category: "web",
@@ -56,7 +58,8 @@ const projectsData = [
     tags: ["Social Media", "Canva", "Analytics"],
     emoji: "📱",
     gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
-    live: "#", code: "#"
+    image: "/EcoBrand/Cashew  Poster.png",
+    live: "/EcoBrand/Cashew  Poster.png", code: "#"
   },
   {
     id: 7, category: "photo",
@@ -65,7 +68,8 @@ const projectsData = [
     tags: ["DSLR", "Studio Lighting", "Retouching"],
     emoji: "📸",
     gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-    live: "#", code: "#"
+    image: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
+    live: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg", code: "#"
   },
   {
     id: 8, category: "it",
@@ -74,7 +78,18 @@ const projectsData = [
     tags: ["CCTV", "Hikvision", "NVR Configuration"],
     emoji: "👁️",
     gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    live: "#", code: "#"
+    image: "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png",
+    live: "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png", code: "#"
+  },
+  {
+    id: 9, category: "design",
+    title: "Aura Hair & Beauty – Identity",
+    desc: "Complete visual identity design for a premium beauty studio, focusing on elegance and modern aesthetics.",
+    tags: ["Logo Design", "Typography", "Color Theory"],
+    emoji: "💄",
+    gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
+    image: "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
+    live: "/EcoBrand/AURA HAIR BEAUTY STUDIO.png", code: "#"
   }
 ];
 
@@ -716,10 +731,16 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
   const badgeLabel = { web: "Website", design: "Graphic Design", it: "IT Project", photo: "Photography" }[project.category as string] || "Project";
   return (
     <div className="project-card reveal" style={{ transitionDelay: `${index * 0.07}s` }}>
-      <div className="project-thumb" style={{ background: project.gradient }}>
-        <span style={{ fontSize: "4rem" }}>{project.emoji}</span>
+      <div className="project-thumb" style={{
+        background: project.image ? `url('${project.image}') center/cover no-repeat` : project.gradient
+      }}>
+        {!project.image && <span style={{ fontSize: "4rem" }}>{project.emoji}</span>}
         <div className="project-overlay">
-          <a href="#" className="proj-link live">View Project</a>
+          {project.image ? (
+            <a href={project.live} target="_blank" className="proj-link live">View Work</a>
+          ) : (
+            <a href="#" className="proj-link live">View Project</a>
+          )}
           <a href="#" className="proj-link code">Details</a>
         </div>
       </div>
