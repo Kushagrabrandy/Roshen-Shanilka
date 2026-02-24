@@ -6,43 +6,47 @@ import { useState, useEffect, useRef, FormEvent } from "react";
 const projectsData = [
   {
     id: 1, category: "design",
-    title: "EcoBrand – Corporate Identity",
-    desc: "Complete branding package including logo, business cards, and a 20-page professional brochure for a green energy startup.",
-    tags: ["Photoshop", "Illustrator", "Branding"],
-    emoji: "🎨",
+    title: "Sacred Ceremonies – Print Identity",
+    desc: "Professional design for ecclesiastical events, including souvenir books, invitations, and bookmarks for silver jubilee celebrations.",
+    tags: ["Photoshop", "Print Media", "Branding"],
+    emoji: "⛪",
     gradient: "linear-gradient(135deg, #6c63ff 0%, #3ecfcf 100%)",
-    image: "/EcoBrand/Cover.png",
+    image: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
     gallery: [
-      "/EcoBrand/Cover.png",
-      "/EcoBrand/0000000.jpg",
-      "/EcoBrand/01.png",
-      "/EcoBrand/Book Font Cover 2.jpg",
-      "/EcoBrand/1st Page.png",
-      "/EcoBrand/Ajith Wellington 25th Bookmark.png"
+      "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
+      "/EcoBrand/Ajith Wellington 25th Bookmark.png",
+      "/EcoBrand/Screenshot 2026-02-24 204214.png"
     ],
     live: "#", code: "#"
   },
   {
-    id: 2, category: "web",
-    title: "TravelPulse – WordPress Site",
-    desc: "A modern, responsive travel blog and booking site with custom theme elements and SEO optimization.",
-    tags: ["WordPress", "SEO", "Elementor"],
-    emoji: "🌐",
+    id: 2, category: "design",
+    title: "Annual Drama Festival Branding",
+    desc: "Complete visual package for a major theatrical event, featuring posters, souvenir programs, and digital promotional materials.",
+    tags: ["Photoshop", "Illustrator", "Event Graphics"],
+    emoji: "🎭",
     gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    image: "/EcoBrand/Nicholite,s Drama Rs.2000.jpg",
+    gallery: [
+      "/EcoBrand/Nicholite,s Drama Rs.2000.jpg",
+      "/EcoBrand/Book Front Cover 1 of 1.png",
+      "/EcoBrand/Font Cover.png",
+      "/EcoBrand/Screenshot 2026-02-24 204338.png"
+    ],
     live: "#", code: "#"
   },
   {
-    id: 3, category: "photo",
-    title: "Aerial Lanka – Drone Cinematography",
-    desc: "A collection of 4K aerial shots and landscape photography from various locations across Sri Lanka.",
-    tags: ["DJI Drone", "Lightroom", "Premiere Pro"],
-    emoji: "🚁",
+    id: 3, category: "design",
+    title: "SNIC Sportswear Branding",
+    desc: "Custom jersey designs and tournament promotional graphics for international school basketball and volleyball teams.",
+    tags: ["Apparel Design", "Sports Branding", "Illustrator"],
+    emoji: "🏀",
     gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    image: "/EcoBrand/SNIC Basketball Jersey 1 of 1 (2).png",
     gallery: [
-      "/Drone Videos/ssstik.io_1771946919687.mp4",
-      "/Drone Videos/ssstik.io_1771947096752.mp4",
-      "/Drone Videos/ssstik.io_1771947261912.mp4",
-      "/Drone Videos/ssstik.io_1771947314544.mp4"
+      "/EcoBrand/SNIC Basketball Jersey 1 of 1 (2).png",
+      "/EcoBrand/Maris Volley 02.png",
+      "/EcoBrand/Annual Inter-House Karate Meet 2025.png"
     ],
     live: "#", code: "#"
   },
@@ -57,46 +61,22 @@ const projectsData = [
   },
   {
     id: 5, category: "design",
-    title: "Event Magazine – Souvenir Book",
-    desc: "Design and layout for a 120-page annual school magazine with custom graphics and photo editing.",
-    tags: ["Adobe InDesign", "Photoshop", "Typography"],
-    emoji: "📚",
-    gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-    image: "/EcoBrand/Book Front Cover 1 of 1.png",
-    gallery: [
-      "/EcoBrand/Book Front Cover 1 of 1.png",
-      "/EcoBrand/Front Iner 1 of 1.png",
-      "/EcoBrand/Book Font Cover 2.jpg"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 6, category: "web",
-    title: "SMM Campaign – Local Brands",
-    desc: "Social media management and content creation for several local SMEs, increasing engagement by 150%.",
-    tags: ["Social Media", "Canva", "Analytics"],
+    title: "Local Brand Marketing",
+    desc: "Creative social media management and high-impact poster designs for local businesses, from food vendors to beauty studios.",
+    tags: ["Social Media", "Poster Design", "Canva"],
     emoji: "📱",
-    gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+    gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
     image: "/EcoBrand/Cashew  Poster.png",
-    live: "/EcoBrand/Cashew  Poster.png", code: "#"
-  },
-  {
-    id: 7, category: "photo",
-    title: "Portrait Series – Professional",
-    desc: "High-quality professional portraits and event photography with advanced retouching techniques.",
-    tags: ["DSLR", "Studio Lighting", "Retouching"],
-    emoji: "📸",
-    gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-    image: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
     gallery: [
-      "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
-      "/EcoBrand/Ajith Wellington 25th Bookmark.png",
-      "/EcoBrand/Dr. Sri Rajan Prize Giving Chif Guest.jpg"
+      "/EcoBrand/Cashew  Poster.png",
+      "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
+      "/EcoBrand/Weeding Cake Add.png",
+      "/EcoBrand/Independence Day  Post.png"
     ],
     live: "#", code: "#"
   },
   {
-    id: 8, category: "it",
+    id: 6, category: "it",
     title: "CCTV Surveillance Mesh",
     desc: "Installation of a 32-camera surveillance system with AI-powered motion alerts and remote cloud monitoring.",
     tags: ["CCTV", "Hikvision", "NVR Configuration"],
@@ -110,12 +90,40 @@ const projectsData = [
     live: "#", code: "#"
   },
   {
+    id: 7, category: "photo",
+    title: "Aerial Lanka – Drone Cinematography",
+    desc: "A collection of 4K aerial shots and landscape photography from various locations across Sri Lanka.",
+    tags: ["DJI Drone", "Lightroom", "Premiere Pro"],
+    emoji: "🚁",
+    gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+    gallery: [
+      "/Drone Videos/ssstik.io_1771946919687.mp4",
+      "/Drone Videos/ssstik.io_1771947096752.mp4",
+      "/Drone Videos/ssstik.io_1771947261912.mp4",
+      "/Drone Videos/ssstik.io_1771947314544.mp4"
+    ],
+    live: "#", code: "#"
+  },
+  {
+    id: 8, category: "design",
+    title: "School Prize Giving – Souvenir",
+    desc: "Elegant souvenir book design for an annual prize giving ceremony, celebrating academic excellence and distinguished guests.",
+    tags: ["Layout Design", "Typography", "Print Media"],
+    emoji: "📜",
+    gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+    image: "/EcoBrand/Dr. Sri Rajan Prize Giving Chif Guest.jpg",
+    gallery: [
+      "/EcoBrand/Dr. Sri Rajan Prize Giving Chif Guest.jpg"
+    ],
+    live: "#", code: "#"
+  },
+  {
     id: 9, category: "design",
     title: "Aura Hair & Beauty – Identity",
     desc: "Complete visual identity design for a premium beauty studio, focusing on elegance and modern aesthetics.",
     tags: ["Logo Design", "Typography", "Color Theory"],
     emoji: "💄",
-    gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
+    gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
     image: "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
     gallery: [
       "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
@@ -378,6 +386,7 @@ export default function Portfolio() {
             <li><a href="#skills" className="nav-link" onClick={() => setIsNavOpen(false)}>Skills</a></li>
             <li><a href="#projects" className="nav-link" onClick={() => setIsNavOpen(false)}>Projects</a></li>
             <li><a href="#experience" className="nav-link" onClick={() => setIsNavOpen(false)}>Experience</a></li>
+            <li><a href="#references" className="nav-link" onClick={() => setIsNavOpen(false)}>References</a></li>
             <li><a href="#contact" className="nav-link" onClick={() => setIsNavOpen(false)}>Contact</a></li>
           </ul>
           <a href="#contact" className="btn btn-sm hire-btn btn-primary">Hire Me</a>
@@ -670,6 +679,51 @@ export default function Portfolio() {
               tasks={["Diagnosed and replicated complex laptop motherboard issues", "Performed precision soldering and component replacement using microscope equipment", "Managed repair and maintenance for hundreds of consumer laptops"]}
               tags={["Soldering", "Diagnostics", "Motherboards", "Laptop Repair"]}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ── REFERENCES ── */}
+      <section id="references" className="section references-section">
+        <div className="section-inner">
+          <div className="section-header reveal">
+            <span className="section-tag">References</span>
+            <h2 className="section-title">Professional <span className="gradient-text">Endorsements</span></h2>
+            <p className="section-subtitle">Verified professional references from my career journey</p>
+          </div>
+          <div className="references-grid">
+            <div className="reference-card glass-card reveal">
+              <div className="reference-quote">“</div>
+              <div className="reference-body">
+                <p>Roshen has consistently demonstrated high levels of technical proficiency and dedication in his role as IT Coordinator at St. Nicholas' International College.</p>
+              </div>
+              <div className="reference-footer">
+                <div className="ref-info">
+                  <h3>Rev. Fr. Anthony Lakshman</h3>
+                  <p>Rector/Principal</p>
+                  <p className="ref-org">St. Nicholas' International College</p>
+                  <div className="ref-contact">
+                    <span>📞 +94 71 354 75 23</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="reference-card glass-card reveal">
+              <div className="reference-quote">“</div>
+              <div className="reference-body">
+                <p>A reliable and skilled technician who maintained our hospital systems with great care and professional integrity.</p>
+              </div>
+              <div className="reference-footer">
+                <div className="ref-info">
+                  <h3>R. A. Wasantha</h3>
+                  <p>Network Administrator</p>
+                  <p className="ref-org">Nawaloka Hospital l Sri Lanka</p>
+                  <div className="ref-contact">
+                    <span>📞 +94 71 718 64 05</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

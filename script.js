@@ -6,28 +6,28 @@
 const projects = [
   {
     id: 1, category: "design",
-    title: "EcoBrand – Corporate Identity",
-    desc: "Complete branding package including logo, business cards, and a 20-page professional brochure for a green energy startup.",
-    tags: ["Photoshop", "Illustrator", "Branding"],
-    emoji: "🎨",
+    title: "Sacred Ceremonies – Print Identity",
+    desc: "Professional design for ecclesiastical events, including souvenir books, invitations, and bookmarks for silver jubilee celebrations.",
+    tags: ["Photoshop", "Print Media", "Branding"],
+    emoji: "⛪",
     gradient: "linear-gradient(135deg, #6c63ff 0%, #3ecfcf 100%)",
     live: "#", code: "#"
   },
   {
-    id: 2, category: "web",
-    title: "TravelPulse – WordPress Site",
-    desc: "A modern, responsive travel blog and booking site with custom theme elements and SEO optimization.",
-    tags: ["WordPress", "SEO", "Elementor"],
-    emoji: "🌐",
+    id: 2, category: "design",
+    title: "Annual Drama Festival Branding",
+    desc: "Complete visual package for a major theatrical event, featuring posters, souvenir programs, and digital promotional materials.",
+    tags: ["Photoshop", "Illustrator", "Event Graphics"],
+    emoji: "🎭",
     gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
     live: "#", code: "#"
   },
   {
-    id: 3, category: "photo",
-    title: "Aerial Lanka – Drone Cinematography",
-    desc: "A collection of 4K aerial shots and landscape photography from various locations across Sri Lanka.",
-    tags: ["DJI Drone", "Lightroom", "Premiere Pro"],
-    emoji: "🚁",
+    id: 3, category: "design",
+    title: "SNIC Sportswear Branding",
+    desc: "Custom jersey designs and tournament promotional graphics for international school basketball and volleyball teams.",
+    tags: ["Apparel Design", "Sports Branding", "Illustrator"],
+    emoji: "🏀",
     gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
     live: "#", code: "#"
   },
@@ -42,38 +42,38 @@ const projects = [
   },
   {
     id: 5, category: "design",
-    title: "Event Magazine – Souvenir Book",
-    desc: "Design and layout for a 120-page annual school magazine with custom graphics and photo editing.",
-    tags: ["Adobe InDesign", "Photoshop", "Typography"],
-    emoji: "📚",
+    title: "Local Brand Marketing",
+    desc: "Creative social media management and high-impact poster designs for local businesses, from food vendors to beauty studios.",
+    tags: ["Social Media", "Poster Design", "Canva"],
+    emoji: "📱",
     gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
     live: "#", code: "#"
   },
   {
-    id: 6, category: "web",
-    title: "SMM Campaign – Local Brands",
-    desc: "Social media management and content creation for several local SMEs, increasing engagement by 150%.",
-    tags: ["Social Media", "Canva", "Analytics"],
-    emoji: "📱",
-    gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
-    live: "#", code: "#"
-  },
-  {
-    id: 7, category: "photo",
-    title: "Portrait Series – Professional",
-    desc: "High-quality professional portraits and event photography with advanced retouching techniques.",
-    tags: ["DSLR", "Studio Lighting", "Retouching"],
-    emoji: "📸",
-    gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-    live: "#", code: "#"
-  },
-  {
-    id: 8, category: "it",
+    id: 6, category: "it",
     title: "CCTV Surveillance Mesh",
     desc: "Installation of a 32-camera surveillance system with AI-powered motion alerts and remote cloud monitoring.",
     tags: ["CCTV", "Hikvision", "NVR Configuration"],
     emoji: "👁️",
     gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    live: "#", code: "#"
+  },
+  {
+    id: 7, category: "photo",
+    title: "Aerial Lanka – Drone Cinematography",
+    desc: "A collection of 4K aerial shots and landscape photography from various locations across Sri Lanka.",
+    tags: ["DJI Drone", "Lightroom", "Premiere Pro"],
+    emoji: "🚁",
+    gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+    live: "#", code: "#"
+  },
+  {
+    id: 8, category: "design",
+    title: "School Prize Giving – Souvenir",
+    desc: "Elegant souvenir book design for an annual prize giving ceremony, celebrating academic excellence and distinguished guests.",
+    tags: ["Layout Design", "Typography", "Print Media"],
+    emoji: "📜",
+    gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
     live: "#", code: "#"
   }
 ];
