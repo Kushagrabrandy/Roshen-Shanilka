@@ -3,7 +3,21 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 
 // ── DATA ─────────────────────────────────────────────
-const projectsData = [
+interface Project {
+  id: number;
+  category: string;
+  title: string;
+  desc: string;
+  tags: string[];
+  emoji?: string;
+  gradient: string;
+  image?: string;
+  gallery?: string[];
+  live: string;
+  code: string;
+}
+
+const projectsData: Project[] = [
   {
     id: 1, category: "design",
     title: "Sacred Ceremonies – Print Identity",
@@ -179,7 +193,7 @@ export default function Portfolio() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success">("idle");
   const [stats, setStats] = useState({ years: 0, clients: 0, designs: 0 });
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -320,7 +334,7 @@ export default function Portfolio() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let particles: any[] = [];
+    let particles: Particle[] = [];
     let W: number, H: number;
 
     const resize = () => {
@@ -831,9 +845,9 @@ export default function Portfolio() {
           <div className="gallery-content" onClick={e => e.stopPropagation()}>
             <button className="close-gallery" onClick={() => setSelectedProject(null)}>&times;</button>
             <div className="gallery-main">
-              {(selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image).endsWith('.mp4') ? (
+              {(selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image!).endsWith('.mp4') ? (
                 <video
-                  key={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image}
+                  key={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image!}
                   src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image}
                   controls
                   autoPlay
@@ -841,7 +855,7 @@ export default function Portfolio() {
                   className="gallery-video"
                 />
               ) : (
-                <img src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image} alt={selectedProject.title} />
+                <img src={selectedProject.gallery?.[galleryIndex] ?? selectedProject.image!} alt={selectedProject.title} />
               )}
               {selectedProject.gallery && selectedProject.gallery.length > 1 && (
                 <>
@@ -852,7 +866,7 @@ export default function Portfolio() {
             </div>
             {selectedProject.gallery && (
               <div className="gallery-thumbs">
-                {selectedProject.gallery.map((img: string, idx: number) => (
+                {selectedProject.gallery!.map((img: string, idx: number) => (
                   <div
                     key={idx}
                     className={`thumb ${idx === galleryIndex ? "active" : ""}`}
@@ -899,9 +913,12 @@ function SkillChip({ name, icon, emoji, level }: { name: string, icon?: string, 
   );
 }
 
-function ProjectCard({ project, index, onViewGallery }: { project: any, index: number, onViewGallery?: () => void }) {
-  const badgeClass = { web: "badge-web", design: "badge-mobile", it: "badge-cloud", photo: "badge-ai" }[project.category as string] || "badge-web";
-  const badgeLabel = { web: "Website", design: "Graphic Design", it: "IT Project", photo: "Photography" }[project.category as string] || "Project";
+function ProjectCard({ project, index, onViewGallery }: { project: Project, index: number, onViewGallery?: () => void }) {
+  const badgeClass: Record<string, string> = { web: "badge-web", design: "badge-mobile", it: "badge-cloud", photo: "badge-ai" };
+  const badgeLabel: Record<string, string> = { web: "Website", design: "Graphic Design", it: "IT Project", photo: "Photography" };
+
+  const currentBadgeClass = badgeClass[project.category] || "badge-web";
+  const currentBadgeLabel = badgeLabel[project.category] || "Project";
   return (
     <div className="project-card reveal" style={{ transitionDelay: `${index * 0.07}s` }}>
       <div className="project-thumb" style={{
@@ -920,7 +937,7 @@ function ProjectCard({ project, index, onViewGallery }: { project: any, index: n
         </div>
       </div>
       <div className="project-body">
-        <span className={`proj-badge ${badgeClass}`}>{badgeLabel}</span>
+        <span className={`proj-badge ${currentBadgeClass}`}>{currentBadgeLabel}</span>
         <h3 className="project-title">{project.title}</h3>
         <p className="project-desc">{project.desc}</p>
         <div className="project-tags">
@@ -931,7 +948,15 @@ function ProjectCard({ project, index, onViewGallery }: { project: any, index: n
   );
 }
 
-function TimelineItem({ title, company, date, tasks, tags }: any) {
+interface TimelineItemProps {
+  title: string;
+  company: string;
+  date: string;
+  tasks: string[];
+  tags: string[];
+}
+
+function TimelineItem({ title, company, date, tasks, tags }: TimelineItemProps) {
   return (
     <div className="timeline-item reveal">
       <div className="timeline-dot"></div>
