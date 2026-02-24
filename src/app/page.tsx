@@ -38,6 +38,12 @@ const projectsData = [
     tags: ["DJI Drone", "Lightroom", "Premiere Pro"],
     emoji: "🚁",
     gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    gallery: [
+      "/Drone Videos/ssstik.io_1771946919687.mp4",
+      "/Drone Videos/ssstik.io_1771947096752.mp4",
+      "/Drone Videos/ssstik.io_1771947261912.mp4",
+      "/Drone Videos/ssstik.io_1771947314544.mp4"
+    ],
     live: "#", code: "#"
   },
   {
@@ -745,7 +751,18 @@ export default function Portfolio() {
           <div className="gallery-content" onClick={e => e.stopPropagation()}>
             <button className="close-gallery" onClick={() => setSelectedProject(null)}>&times;</button>
             <div className="gallery-main">
-              <img src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image} alt={selectedProject.title} />
+              {(selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image).endsWith('.mp4') ? (
+                <video
+                  key={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image}
+                  src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image}
+                  controls
+                  autoPlay
+                  loop
+                  className="gallery-video"
+                />
+              ) : (
+                <img src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image} alt={selectedProject.title} />
+              )}
               {selectedProject.gallery && selectedProject.gallery.length > 1 && (
                 <>
                   <button className="gallery-nav prev" onClick={() => setGalleryIndex((galleryIndex - 1 + selectedProject.gallery.length) % selectedProject.gallery.length)}>&#10094;</button>
@@ -761,7 +778,11 @@ export default function Portfolio() {
                     className={`thumb ${idx === galleryIndex ? "active" : ""}`}
                     onClick={() => setGalleryIndex(idx)}
                   >
-                    <img src={img} alt="thumb" />
+                    {img.endsWith('.mp4') ? (
+                      <div className="video-thumb-placeholder">📹</div>
+                    ) : (
+                      <img src={img} alt="thumb" />
+                    )}
                   </div>
                 ))}
               </div>
