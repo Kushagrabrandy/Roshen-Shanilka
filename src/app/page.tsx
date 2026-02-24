@@ -12,7 +12,15 @@ const projectsData = [
     emoji: "🎨",
     gradient: "linear-gradient(135deg, #6c63ff 0%, #3ecfcf 100%)",
     image: "/EcoBrand/Cover.png",
-    live: "/EcoBrand/Cover.png", code: "#"
+    gallery: [
+      "/EcoBrand/Cover.png",
+      "/EcoBrand/0000000.jpg",
+      "/EcoBrand/01.png",
+      "/EcoBrand/Book Font Cover 2.jpg",
+      "/EcoBrand/1st Page.png",
+      "/EcoBrand/Ajith Wellington 25th Bookmark.png"
+    ],
+    live: "#", code: "#"
   },
   {
     id: 2, category: "web",
@@ -49,7 +57,12 @@ const projectsData = [
     emoji: "📚",
     gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
     image: "/EcoBrand/Book Front Cover 1 of 1.png",
-    live: "/EcoBrand/Book Front Cover 1 of 1.png", code: "#"
+    gallery: [
+      "/EcoBrand/Book Front Cover 1 of 1.png",
+      "/EcoBrand/Front Iner 1 of 1.png",
+      "/EcoBrand/Book Font Cover 2.jpg"
+    ],
+    live: "#", code: "#"
   },
   {
     id: 6, category: "web",
@@ -69,7 +82,12 @@ const projectsData = [
     emoji: "📸",
     gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
     image: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
-    live: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg", code: "#"
+    gallery: [
+      "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
+      "/EcoBrand/Ajith Wellington 25th Bookmark.png",
+      "/EcoBrand/Dr. Sri Rajan Prize Giving Chif Guest.jpg"
+    ],
+    live: "#", code: "#"
   },
   {
     id: 8, category: "it",
@@ -79,7 +97,11 @@ const projectsData = [
     emoji: "👁️",
     gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
     image: "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png",
-    live: "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png", code: "#"
+    gallery: [
+      "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png",
+      "/EcoBrand/IMOU Dual Leans.png"
+    ],
+    live: "#", code: "#"
   },
   {
     id: 9, category: "design",
@@ -89,7 +111,12 @@ const projectsData = [
     emoji: "💄",
     gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
     image: "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
-    live: "/EcoBrand/AURA HAIR BEAUTY STUDIO.png", code: "#"
+    gallery: [
+      "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
+      "/EcoBrand/Weeding Cake Add.png",
+      "/EcoBrand/Independence Day  Post.png"
+    ],
+    live: "#", code: "#"
   }
 ];
 
@@ -112,6 +139,8 @@ export default function Portfolio() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success">("idle");
   const [stats, setStats] = useState({ years: 0, clients: 0, designs: 0 });
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -584,7 +613,15 @@ export default function Portfolio() {
           </div>
           <div className="projects-grid">
             {filteredProjects.map((p, i) => (
-              <ProjectCard key={p.id} project={p} index={i} />
+              <ProjectCard
+                key={p.id}
+                project={p}
+                index={i}
+                onViewGallery={() => {
+                  setSelectedProject(p);
+                  setGalleryIndex(0);
+                }}
+              />
             ))}
           </div>
         </div>
@@ -702,6 +739,41 @@ export default function Portfolio() {
 
       <button className={`back-to-top ${showBackToTop ? "show" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>↑</button>
 
+      {/* ── GALLERY MODAL ── */}
+      {selectedProject && (
+        <div className="gallery-modal" onClick={() => setSelectedProject(null)}>
+          <div className="gallery-content" onClick={e => e.stopPropagation()}>
+            <button className="close-gallery" onClick={() => setSelectedProject(null)}>&times;</button>
+            <div className="gallery-main">
+              <img src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image} alt={selectedProject.title} />
+              {selectedProject.gallery && selectedProject.gallery.length > 1 && (
+                <>
+                  <button className="gallery-nav prev" onClick={() => setGalleryIndex((galleryIndex - 1 + selectedProject.gallery.length) % selectedProject.gallery.length)}>&#10094;</button>
+                  <button className="gallery-nav next" onClick={() => setGalleryIndex((galleryIndex + 1) % selectedProject.gallery.length)}>&#10095;</button>
+                </>
+              )}
+            </div>
+            {selectedProject.gallery && (
+              <div className="gallery-thumbs">
+                {selectedProject.gallery.map((img: string, idx: number) => (
+                  <div
+                    key={idx}
+                    className={`thumb ${idx === galleryIndex ? "active" : ""}`}
+                    onClick={() => setGalleryIndex(idx)}
+                  >
+                    <img src={img} alt="thumb" />
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="gallery-info">
+              <h3>{selectedProject.title}</h3>
+              <p>{selectedProject.desc}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Image Mask Definition */}
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
@@ -726,7 +798,7 @@ function SkillChip({ name, icon, emoji, level }: { name: string, icon?: string, 
   );
 }
 
-function ProjectCard({ project, index }: { project: any, index: number }) {
+function ProjectCard({ project, index, onViewGallery }: { project: any, index: number, onViewGallery?: () => void }) {
   const badgeClass = { web: "badge-web", design: "badge-mobile", it: "badge-cloud", photo: "badge-ai" }[project.category as string] || "badge-web";
   const badgeLabel = { web: "Website", design: "Graphic Design", it: "IT Project", photo: "Photography" }[project.category as string] || "Project";
   return (
@@ -736,7 +808,9 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
       }}>
         {!project.image && <span style={{ fontSize: "4rem" }}>{project.emoji}</span>}
         <div className="project-overlay">
-          {project.image ? (
+          {project.gallery ? (
+            <button className="proj-link live" onClick={onViewGallery}>View Works</button>
+          ) : project.image ? (
             <a href={project.live} target="_blank" className="proj-link live">View Work</a>
           ) : (
             <a href="#" className="proj-link live">View Project</a>
