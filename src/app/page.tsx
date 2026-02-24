@@ -132,21 +132,6 @@ const projectsData: Project[] = [
     live: "#", code: "#"
   },
   {
-    id: 9, category: "design",
-    title: "Aura Hair & Beauty – Identity",
-    desc: "Complete visual identity design for a premium beauty studio, focusing on elegance and modern aesthetics.",
-    tags: ["Logo Design", "Typography", "Color Theory"],
-    emoji: "💄",
-    gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-    image: "/EcoBrand/aura-hair-beauty-studio.png",
-    gallery: [
-      "/EcoBrand/aura-hair-beauty-studio.png",
-      "/EcoBrand/weeding-cake-add.png",
-      "/EcoBrand/independence-day-post.png"
-    ],
-    live: "#", code: "#"
-  },
-  {
     id: 10, category: "photo",
     title: "The Portrait Series – Professional Studio",
     desc: "A collection of high-end professional portraits and candid captures, showcasing advanced lighting and post-processing techniques.",
