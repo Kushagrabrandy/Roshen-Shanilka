@@ -11,11 +11,11 @@ const projectsData = [
     tags: ["Photoshop", "Print Media", "Branding"],
     emoji: "⛪",
     gradient: "linear-gradient(135deg, #6c63ff 0%, #3ecfcf 100%)",
-    image: "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
+    image: "/EcoBrand/invitation-silver-jubilee-of-priestly-ordination.jpg",
     gallery: [
-      "/EcoBrand/Invitation Silver Jubilee of Priestly Ordination.jpg",
-      "/EcoBrand/Ajith Wellington 25th Bookmark.png",
-      "/EcoBrand/Screenshot 2026-02-24 204214.png"
+      "/EcoBrand/invitation-silver-jubilee-of-priestly-ordination.jpg",
+      "/EcoBrand/ajith-wellington-25th-bookmark.png",
+      "/EcoBrand/screenshot-2026-02-24-204214.png"
     ],
     live: "#", code: "#"
   },
@@ -26,12 +26,12 @@ const projectsData = [
     tags: ["Photoshop", "Illustrator", "Event Graphics"],
     emoji: "🎭",
     gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-    image: "/EcoBrand/Nicholite,s Drama Rs.2000.jpg",
+    image: "/EcoBrand/nicholite-s-drama-rs.2000.jpg",
     gallery: [
-      "/EcoBrand/Nicholite,s Drama Rs.2000.jpg",
-      "/EcoBrand/Book Front Cover 1 of 1.png",
-      "/EcoBrand/Font Cover.png",
-      "/EcoBrand/Screenshot 2026-02-24 204338.png"
+      "/EcoBrand/nicholite-s-drama-rs.2000.jpg",
+      "/EcoBrand/book-front-cover-1-of-1.png",
+      "/EcoBrand/font-cover.png",
+      "/EcoBrand/screenshot-2026-02-24-204338.png"
     ],
     live: "#", code: "#"
   },
@@ -42,11 +42,11 @@ const projectsData = [
     tags: ["Apparel Design", "Sports Branding", "Illustrator"],
     emoji: "🏀",
     gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-    image: "/EcoBrand/SNIC Basketball Jersey 1 of 1 (2).png",
+    image: "/EcoBrand/snic-basketball-jersey-1-of-1-2-.png",
     gallery: [
-      "/EcoBrand/SNIC Basketball Jersey 1 of 1 (2).png",
-      "/EcoBrand/Maris Volley 02.png",
-      "/EcoBrand/Annual Inter-House Karate Meet 2025.png"
+      "/EcoBrand/snic-basketball-jersey-1-of-1-2-.png",
+      "/EcoBrand/maris-volley-02.png",
+      "/EcoBrand/annual-inter-house-karate-meet-2025.png"
     ],
     live: "#", code: "#"
   },
@@ -66,12 +66,12 @@ const projectsData = [
     tags: ["Social Media", "Poster Design", "Canva"],
     emoji: "📱",
     gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-    image: "/EcoBrand/Cashew  Poster.png",
+    image: "/EcoBrand/cashew-poster.png",
     gallery: [
-      "/EcoBrand/Cashew  Poster.png",
-      "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
-      "/EcoBrand/Weeding Cake Add.png",
-      "/EcoBrand/Independence Day  Post.png"
+      "/EcoBrand/cashew-poster.png",
+      "/EcoBrand/aura-hair-beauty-studio.png",
+      "/EcoBrand/weeding-cake-add.png",
+      "/EcoBrand/independence-day-post.png"
     ],
     live: "#", code: "#"
   },
@@ -82,10 +82,10 @@ const projectsData = [
     tags: ["CCTV", "Hikvision", "NVR Configuration"],
     emoji: "👁️",
     gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    image: "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png",
+    image: "/EcoBrand/imou-cruiser-sc-5mp-smart-wifi-camera-with-red-blue-warning-lights.png",
     gallery: [
-      "/EcoBrand/IMOU Cruiser SC 5MP Smart WiFi Camera with Red & Blue Warning Lights.png",
-      "/EcoBrand/IMOU Dual Leans.png"
+      "/EcoBrand/imou-cruiser-sc-5mp-smart-wifi-camera-with-red-blue-warning-lights.png",
+      "/EcoBrand/imou-dual-leans.png"
     ],
     live: "#", code: "#"
   },
@@ -97,10 +97,10 @@ const projectsData = [
     emoji: "🚁",
     gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
     gallery: [
-      "/drone-videos/ssstik.io_1771946919687.mp4",
-      "/drone-videos/ssstik.io_1771947096752.mp4",
-      "/drone-videos/ssstik.io_1771947261912.mp4",
-      "/drone-videos/ssstik.io_1771947314544.mp4"
+      "/drone-videos/ssstik.io-1771946919687.mp4",
+      "/drone-videos/ssstik.io-1771947096752.mp4",
+      "/drone-videos/ssstik.io-1771947261912.mp4",
+      "/drone-videos/ssstik.io-1771947314544.mp4"
     ],
     live: "#", code: "#"
   },
@@ -111,9 +111,9 @@ const projectsData = [
     tags: ["Layout Design", "Typography", "Print Media"],
     emoji: "📜",
     gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-    image: "/EcoBrand/Dr. Sri Rajan Prize Giving Chif Guest.jpg",
+    image: "/EcoBrand/dr.-sri-rajan-prize-giving-chif-guest.jpg",
     gallery: [
-      "/EcoBrand/Dr. Sri Rajan Prize Giving Chif Guest.jpg"
+      "/EcoBrand/dr.-sri-rajan-prize-giving-chif-guest.jpg"
     ],
     live: "#", code: "#"
   },
@@ -124,11 +124,11 @@ const projectsData = [
     tags: ["Logo Design", "Typography", "Color Theory"],
     emoji: "💄",
     gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-    image: "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
+    image: "/EcoBrand/aura-hair-beauty-studio.png",
     gallery: [
-      "/EcoBrand/AURA HAIR BEAUTY STUDIO.png",
-      "/EcoBrand/Weeding Cake Add.png",
-      "/EcoBrand/Independence Day  Post.png"
+      "/EcoBrand/aura-hair-beauty-studio.png",
+      "/EcoBrand/weeding-cake-add.png",
+      "/EcoBrand/independence-day-post.png"
     ],
     live: "#", code: "#"
   },
@@ -139,22 +139,22 @@ const projectsData = [
     tags: ["Portraiture", "Studio Lighting", "Retouching"],
     emoji: "📸",
     gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
-    image: "/portraits/WhatsApp Image 2026-02-24 at 19.19.30.jpeg",
+    image: "/portraits/whatsapp-image-2026-02-24-at-19.19.30.jpeg",
     gallery: [
-      "/portraits/WhatsApp Image 2026-02-24 at 19.19.30.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.19.50.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.20.18.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.20.39.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.21.58.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.22.22.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.23.01.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.23.26.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.23.52.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.26.20.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.26.43.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.26.49.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.27.11.jpeg",
-      "/portraits/WhatsApp Image 2026-02-24 at 19.27.23.jpeg"
+      "/portraits/whatsapp-image-2026-02-24-at-19.19.30.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.19.50.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.20.18.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.20.39.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.21.58.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.22.22.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.23.01.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.23.26.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.23.52.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.26.20.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.26.43.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.26.49.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.27.11.jpeg",
+      "/portraits/whatsapp-image-2026-02-24-at-19.27.23.jpeg"
     ],
     live: "#", code: "#"
   }
