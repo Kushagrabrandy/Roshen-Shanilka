@@ -75,6 +75,15 @@ const projects = [
     emoji: "📜",
     gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
     live: "#", code: "#"
+  },
+  {
+    id: 10, category: "photo",
+    title: "The Portrait Series – Professional Studio",
+    desc: "A collection of high-end professional portraits and candid captures, showcasing advanced lighting and post-processing techniques.",
+    tags: ["Portraiture", "Studio Lighting", "Retouching"],
+    emoji: "📸",
+    gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+    live: "#", code: "#"
   }
 ];
 

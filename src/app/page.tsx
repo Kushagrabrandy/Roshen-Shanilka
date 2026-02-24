@@ -131,6 +131,32 @@ const projectsData = [
       "/EcoBrand/Independence Day  Post.png"
     ],
     live: "#", code: "#"
+  },
+  {
+    id: 10, category: "photo",
+    title: "The Portrait Series – Professional Studio",
+    desc: "A collection of high-end professional portraits and candid captures, showcasing advanced lighting and post-processing techniques.",
+    tags: ["Portraiture", "Studio Lighting", "Retouching"],
+    emoji: "📸",
+    gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+    image: "/portraits/WhatsApp Image 2026-02-24 at 19.19.30.jpeg",
+    gallery: [
+      "/portraits/WhatsApp Image 2026-02-24 at 19.19.30.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.19.50.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.20.18.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.20.39.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.21.58.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.22.22.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.23.01.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.23.26.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.23.52.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.26.20.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.26.43.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.26.49.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.27.11.jpeg",
+      "/portraits/WhatsApp Image 2026-02-24 at 19.27.23.jpeg"
+    ],
+    live: "#", code: "#"
   }
 ];
 
