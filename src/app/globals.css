@@ -720,12 +720,23 @@ body {
   font-weight: 600;
 }
 
-.about-actions {
+.footer-links-row {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 24px;
 }
+
+.footer-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color var(--transfast);
+}
+
+.footer-link:hover {
+  color: var(--text);
+}
+
 
 .social-links {
   display: flex;
@@ -1274,19 +1285,19 @@ body {
   font-size: 0.88rem;
 }
 
-.footer-links {
+.footer-links-row {
   display: flex;
-  gap: 20px;
+  gap: 32px;
 }
 
-.footer-links a {
+.footer-link {
   color: var(--text-dim);
   text-decoration: none;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   transition: color var(--transfast);
 }
 
-.footer-links a:hover {
+.footer-link:hover {
   color: var(--accent1);
 }
 

@@ -387,7 +387,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="about-cards-col reveal" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div className="about-cards-col" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <AboutMetaCard icon="🎓" title="Education" text={<>National Cert. in ICT<br />Don Bosco Technical - 2020</>} />
               <AboutMetaCard icon="🏆" title="Certifications" text={<>NVQ Level 3 & 4 (Dip)<br />Hardware & Networking<br />Creative Design</>} />
               <AboutMetaCard icon="🚁" title="Hobbies" text={<>Photography<br />Drone Cinematography<br />Tech Exploring</>} />
@@ -520,9 +520,22 @@ export default function Portfolio() {
 
       <footer className="footer">
         <div className="footer-inner">
-          <a href="#home" className="nav-logo"><span className="accent">&lt;</span>RS<span className="accent">/&gt;</span></a>
-          <p>© 2026 Roshen Shanilka. Fully Database Driven.</p>
+          <div className="footer-left">
+            <p>© 2026 Roshen Shanilka. Professional Portfolio.</p>
+          </div>
+          <div className="footer-links-row">
+            <a href="#about" className="footer-link">About</a>
+            <a href="#projects" className="footer-link">Work</a>
+            <a href="#contact" className="footer-link">Contact</a>
+          </div>
         </div>
+        <button
+          className={`back-to-top ${showBackToTop ? "show" : ""}`}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to Top"
+        >
+          ↑
+        </button>
       </footer>
 
       {selectedProject && (
@@ -555,7 +568,7 @@ export default function Portfolio() {
 // ── UTILS ───────────────────────────────────────────
 function AboutMetaCard({ icon, title, text }: { icon: string, title: string, text: React.ReactNode }) {
   return (
-    <div className="glass-card revelation" style={{ padding: "24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", border: "1px solid var(--border)" }}>
+    <div className="glass-card reveal" style={{ padding: "24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", border: "1px solid var(--border)" }}>
       <div style={{ fontSize: "2rem" }}>{icon}</div>
       <h3 style={{ fontSize: "1.1rem", fontWeight: "700" }}>{title}</h3>
       <div style={{ fontSize: "0.85rem", color: "var(--text-dim)", lineHeight: "1.6" }}>{text}</div>
