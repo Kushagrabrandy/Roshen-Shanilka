@@ -2,162 +2,47 @@
 
 import { useState, useEffect, useRef, FormEvent } from "react";
 
-// ── DATA ─────────────────────────────────────────────
+// ── DATA Types ─────────────────────────────────────────
 interface Project {
-  id: number;
+  id: string;
   category: string;
   title: string;
-  desc: string;
+  description: string;
   tags: string[];
-  emoji?: string;
-  gradient: string;
-  image?: string;
-  gallery?: string[];
-  live: string;
-  code: string;
+  emoji?: string | null;
+  gradient?: string | null;
+  image?: string | null;
+  gallery?: string[] | null;
+  liveUrl?: string | null;
+  codeUrl?: string | null;
 }
 
-const projectsData: Project[] = [
-  {
-    id: 1, category: "design",
-    title: "Sacred Ceremonies – Print Identity",
-    desc: "Professional design for ecclesiastical events, including souvenir books, invitations, and bookmarks for silver jubilee celebrations.",
-    tags: ["Photoshop", "Print Media", "Branding"],
-    emoji: "⛪",
-    gradient: "linear-gradient(135deg, #6c63ff 0%, #3ecfcf 100%)",
-    image: "/EcoBrand/invitation-silver-jubilee-of-priestly-ordination.jpg",
-    gallery: [
-      "/EcoBrand/invitation-silver-jubilee-of-priestly-ordination.jpg",
-      "/EcoBrand/ajith-wellington-25th-bookmark.png",
-      "/EcoBrand/screenshot-2026-02-24-204214.png"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 2, category: "design",
-    title: "Annual Drama Festival Branding",
-    desc: "Complete visual package for a major theatrical event, featuring posters, souvenir programs, and digital promotional materials.",
-    tags: ["Photoshop", "Illustrator", "Event Graphics"],
-    emoji: "🎭",
-    gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-    image: "/EcoBrand/nicholite-s-drama-rs.2000.jpg",
-    gallery: [
-      "/EcoBrand/nicholite-s-drama-rs.2000.jpg",
-      "/EcoBrand/book-front-cover-1-of-1.png",
-      "/EcoBrand/font-cover.png",
-      "/EcoBrand/screenshot-2026-02-24-204338.png"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 3, category: "design",
-    title: "SNIC Sportswear Branding",
-    desc: "Custom jersey designs and tournament promotional graphics for international school basketball and volleyball teams.",
-    tags: ["Apparel Design", "Sports Branding", "Illustrator"],
-    emoji: "🏀",
-    gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-    image: "/EcoBrand/snic-basketball-jersey-1-of-1-2-.png",
-    gallery: [
-      "/EcoBrand/snic-basketball-jersey-1-of-1-2-.png",
-      "/EcoBrand/maris-volley-02.png",
-      "/EcoBrand/annual-inter-house-karate-meet-2025.png"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 4, category: "it",
-    title: "School Network Infrastructure",
-    desc: "Designed and implemented a secure, high-speed network for a campus of 500+ users with firewall and content filtering.",
-    tags: ["Networking", "Security", "Server Admin"],
-    emoji: "🖥️",
-    gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-    live: "#", code: "#"
-  },
-  {
-    id: 5, category: "design",
-    title: "Local Brand Marketing",
-    desc: "Creative social media management and high-impact poster designs for local businesses, from food vendors to beauty studios.",
-    tags: ["Social Media", "Poster Design", "Canva"],
-    emoji: "📱",
-    gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-    image: "/EcoBrand/cashew-poster.png",
-    gallery: [
-      "/EcoBrand/cashew-poster.png",
-      "/EcoBrand/aura-hair-beauty-studio.png",
-      "/EcoBrand/weeding-cake-add.png",
-      "/EcoBrand/independence-day-post.png"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 6, category: "it",
-    title: "CCTV Surveillance Mesh",
-    desc: "Installation of a 32-camera surveillance system with AI-powered motion alerts and remote cloud monitoring.",
-    tags: ["CCTV", "Hikvision", "NVR Configuration"],
-    emoji: "👁️",
-    gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    image: "/EcoBrand/imou-cruiser-sc-5mp-smart-wifi-camera-with-red-blue-warning-lights.png",
-    gallery: [
-      "/EcoBrand/imou-cruiser-sc-5mp-smart-wifi-camera-with-red-blue-warning-lights.png",
-      "/EcoBrand/imou-dual-leans.png"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 7, category: "photo",
-    title: "Aerial Lanka – Drone Cinematography",
-    desc: "A collection of 4K aerial shots and landscape photography from various locations across Sri Lanka.",
-    tags: ["DJI Drone", "Lightroom", "Premiere Pro"],
-    emoji: "🚁",
-    gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
-    gallery: [
-      "/drone-videos/ssstik.io-1771946919687.mp4",
-      "/drone-videos/ssstik.io-1771947096752.mp4",
-      "/drone-videos/ssstik.io-1771947261912.mp4",
-      "/drone-videos/ssstik.io-1771947314544.mp4"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 8, category: "design",
-    title: "School Prize Giving – Souvenir",
-    desc: "Elegant souvenir book design for an annual prize giving ceremony, celebrating academic excellence and distinguished guests.",
-    tags: ["Layout Design", "Typography", "Print Media"],
-    emoji: "📜",
-    gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-    image: "/EcoBrand/dr.-sri-rajan-prize-giving-chif-guest.jpg",
-    gallery: [
-      "/EcoBrand/dr.-sri-rajan-prize-giving-chif-guest.jpg"
-    ],
-    live: "#", code: "#"
-  },
-  {
-    id: 10, category: "photo",
-    title: "The Portrait Series – Professional Studio",
-    desc: "A collection of high-end professional portraits and candid captures, showcasing advanced lighting and post-processing techniques.",
-    tags: ["Portraiture", "Studio Lighting", "Retouching"],
-    emoji: "📸",
-    gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
-    image: "/portraits/whatsapp-image-2026-02-24-at-19.19.30.jpeg",
-    gallery: [
-      "/portraits/whatsapp-image-2026-02-24-at-19.19.30.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.19.50.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.20.18.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.20.39.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.21.58.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.22.22.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.23.01.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.23.26.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.23.52.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.26.20.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.26.43.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.26.49.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.27.11.jpeg",
-      "/portraits/whatsapp-image-2026-02-24-at-19.27.23.jpeg"
-    ],
-    live: "#", code: "#"
-  }
-];
+interface Endorsement {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  message: string;
+  phone?: string | null;
+}
+
+interface Skill {
+  id: string;
+  name: string;
+  level: number;
+  category: string;
+  icon?: string | null;
+  emoji?: string | null;
+}
+
+interface ExperienceItem {
+  id: string;
+  title: string;
+  company: string;
+  dateRange: string;
+  tasks: string[];
+  tags: string[];
+}
 
 const phrases = [
   "Building Modern Websites",
@@ -168,7 +53,7 @@ const phrases = [
   "Photography & Drone Work"
 ];
 
-// ── COMPONENT ────────────────────────────────────────
+// ── MAIN PORTFOLIO COMPONENT ───────────────────────────
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState("design");
   const [projectFilter, setProjectFilter] = useState("all");
@@ -181,9 +66,40 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
 
+  // Database States
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
+  const [experience, setExperience] = useState<ExperienceItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+
+  // ── FETCH DATA ──────────────────────────────────────
+  useEffect(() => {
+    async function fetchAll() {
+      try {
+        const [projRes, skillRes, endRes, expRes] = await Promise.all([
+          fetch("/api/projects"),
+          fetch("/api/skills"),
+          fetch("/api/endorsements"),
+          fetch("/api/experience")
+        ]);
+
+        if (projRes.ok) setProjects(await projRes.json());
+        if (skillRes.ok) setSkills(await skillRes.json());
+        if (endRes.ok) setEndorsements(await endRes.json());
+        if (expRes.ok) setExperience(await expRes.json());
+      } catch (err) {
+        console.error("Failed to fetch content", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchAll();
+  }, []);
 
   // ── TYPING EFFECT ───────────────────────────────────
   useEffect(() => {
@@ -263,54 +179,10 @@ export default function Portfolio() {
     };
 
     return () => observer.disconnect();
-  }, []);
+  }, [isLoading]);
 
-  // ── CUSTOM CURSOR ───────────────────────────────────
-  useEffect(() => {
-    let mx = 0, my = 0, fx = 0, fy = 0;
-    const moveCursor = (e: MouseEvent) => {
-      mx = e.clientX;
-      my = e.clientY;
-      if (cursorRef.current) {
-        cursorRef.current.style.left = mx + "px";
-        cursorRef.current.style.top = my + "px";
-      }
-    };
+  // REMOVED: CUSTOM CURSOR EFFECT
 
-    const animCursor = () => {
-      fx += (mx - fx) * 0.12;
-      fy += (my - fy) * 0.12;
-      if (followerRef.current) {
-        followerRef.current.style.left = fx + "px";
-        followerRef.current.style.top = fy + "px";
-      }
-      requestAnimationFrame(animCursor);
-    };
-
-    window.addEventListener("mousemove", moveCursor);
-    const rAF = requestAnimationFrame(animCursor);
-
-    const interactiveEls = document.querySelectorAll("a, button, .project-card, .skill-chip");
-    interactiveEls.forEach(el => {
-      el.addEventListener("mouseenter", () => {
-        if (cursorRef.current && followerRef.current) {
-          cursorRef.current.style.transform = "translate(-50%,-50%) scale(1.8)";
-          followerRef.current.style.transform = "translate(-50%,-50%) scale(1.4)";
-        }
-      });
-      el.addEventListener("mouseleave", () => {
-        if (cursorRef.current && followerRef.current) {
-          cursorRef.current.style.transform = "translate(-50%,-50%) scale(1)";
-          followerRef.current.style.transform = "translate(-50%,-50%) scale(1)";
-        }
-      });
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      cancelAnimationFrame(rAF);
-    };
-  }, []);
 
   // ── PARTICLES ───────────────────────────────────────
   useEffect(() => {
@@ -360,7 +232,6 @@ export default function Portfolio() {
     const anim = () => {
       ctx.clearRect(0, 0, W, H);
       particles.forEach(p => { p.update(); p.draw(); });
-      // Connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -397,15 +268,18 @@ export default function Portfolio() {
   };
 
   const filteredProjects = projectFilter === "all"
-    ? projectsData
-    : projectsData.filter(p => p.category === projectFilter);
+    ? projects
+    : projects.filter(p => p.category === projectFilter);
 
   return (
     <>
+      <canvas ref={canvasRef} id="bg-canvas" style={{ position: "fixed", top: 0, left: 0, zIndex: -1 }} />
+
+
       <nav id="navbar" className={isNavScrolled ? "scrolled" : ""}>
         <div className="nav-inner">
           <a href="#home" className="nav-logo"><span className="accent">&lt;</span>RS<span className="accent">/&gt;</span></a>
-          <ul className={`nav-links ${isNavOpen ? "open" : ""}`} id="nav-links">
+          <ul className={`nav-links ${isNavOpen ? "open" : ""}`}>
             <li><a href="#home" className="nav-link" onClick={() => setIsNavOpen(false)}>Home</a></li>
             <li><a href="#about" className="nav-link" onClick={() => setIsNavOpen(false)}>About</a></li>
             <li><a href="#skills" className="nav-link" onClick={() => setIsNavOpen(false)}>Skills</a></li>
@@ -415,95 +289,48 @@ export default function Portfolio() {
             <li><a href="#contact" className="nav-link" onClick={() => setIsNavOpen(false)}>Contact</a></li>
           </ul>
           <a href="#contact" className="btn btn-sm hire-btn btn-primary">Hire Me</a>
-          <button id="hamburger" className={`hamburger ${isNavOpen ? "open" : ""}`} onClick={() => setIsNavOpen(!isNavOpen)}>
+          <button className={`hamburger ${isNavOpen ? "open" : ""}`} onClick={() => setIsNavOpen(!isNavOpen)}>
             <span></span><span></span><span></span>
           </button>
         </div>
       </nav>
 
-      {/* ── HERO ── */}
       <section id="home" className="hero">
         <div className="hero-content">
-          <div className="hero-badge">
-            <span className="badge-dot"></span>
-            Available for new projects
-          </div>
-          <h1 className="hero-title">
-            Hi, I&apos;m <span className="gradient-text">Roshen Shanilka</span>
-          </h1>
+          <div className="hero-badge"><span className="badge-dot"></span>Available for new projects</div>
+          <h1 className="hero-title">Hi, I&apos;m <span className="gradient-text">Roshen Shanilka</span></h1>
           <div className="hero-subtitle-wrap">
             <span className="hero-subtitle">I am into </span>
             <span className="typed-text">{typedText}</span>
             <span className="cursor-blink">|</span>
           </div>
-          <p className="hero-desc">
-            IT Specialist & Creative Designer. I bridge the gap between technical infrastructure
-            and visual excellence. From managing school networks to crafting social media identities.
-          </p>
+          <p className="hero-desc">IT Specialist & Creative Designer. I bridge the gap between technical infrastructure and visual excellence.</p>
           <div className="hero-cta">
             <a href="#projects" className="btn btn-primary">My Portfolio</a>
             <a href="#contact" className="btn btn-ghost">Let&apos;s Talk</a>
           </div>
           <div className="hero-stats reveal" id="hero-stats-box">
-            <div className="stat">
-              <div>
-                <span className="stat-num">{stats.years}</span>
-                <span className="stat-plus">+</span>
-              </div>
-              <span className="stat-label">Years IT Exp.</span>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat">
-              <div>
-                <span className="stat-num">{stats.clients}</span>
-                <span className="stat-plus">+</span>
-              </div>
-              <span className="stat-label">Clients</span>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat">
-              <div>
-                <span className="stat-num">{stats.designs}</span>
-                <span className="stat-plus">+</span>
-              </div>
-              <span className="stat-label">Designs</span>
-            </div>
+            <StatItem num={stats.years} label="Years IT Exp." />
+            <div className="stat-divider" />
+            <StatItem num={stats.clients} label="Clients" />
+            <div className="stat-divider" />
+            <StatItem num={stats.designs} label="Designs" />
           </div>
         </div>
         <div className="hero-visual">
           <div className="avatar-ring">
             <div className="avatar-container">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/new-image-2.png"
-                alt="Roshen Shanilka"
-                className="avatar-img"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent && !parent.querySelector('.avatar-placeholder')) {
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'avatar-placeholder';
-                    placeholder.innerHTML = 'RS';
-                    parent.appendChild(placeholder);
-                  }
-                }}
-              />
+              <img src="/new-image-2.png" alt="Roshen Shanilka" className="avatar-img" onError={(e) => { (e.target as any).src = "https://via.placeholder.com/400x400?text=RS"; }} />
             </div>
           </div>
         </div>
-        <a href="#about" className="scroll-indicator">
-          <span>About Me</span>
-          <div className="scroll-arrow"></div>
-        </a>
+        <a href="#about" className="scroll-indicator"><span>About Me</span><div className="scroll-arrow" /></a>
       </section>
 
-      {/* ── ABOUT ── */}
       <section id="about" className="section about-section">
         <div className="section-inner">
           <div className="section-header reveal">
-            <span className="section-tag">About Me</span>
+            <div id="about-me" className="section-tag" style={{ margin: "0 auto 16px" }}>About Me</div>
             <h2 className="section-title">Dedicated to <span className="gradient-text">Excellence</span></h2>
             <p className="section-subtitle">Blending technical IT expertise with creative design</p>
           </div>
@@ -512,8 +339,8 @@ export default function Portfolio() {
               <div className="about-text">
                 <p>
                   I&apos;m <strong>Roshen Shanilka</strong>, a passionate IT Specialist and Designer based in Kochchikade, Sri Lanka.
-                  My journey in the tech world started with hardware and networking, but it quickly expanded into the creative realms
-                  of graphic design, video editing, and social media management.
+                  My journey in the tech world started with hardware and networking, but it quickly expanded into the creative realms of
+                  graphic design, video editing, and social media management.
                 </p>
                 <p>
                   Currently, I serve as the IT Coordinator for St. Nicholas&apos; International College, where I maintain complex IT infrastructures.
@@ -523,131 +350,83 @@ export default function Portfolio() {
                   My philosophy is simple: technology should be invisible and efficient, while design should be bold and impactful.
                   Whether I&apos;m troubleshooting a server or capturing the perfect drone shot, I aim for perfection.
                 </p>
-                <div className="about-details">
-                  <div className="detail-item"><span className="detail-label">Name:</span><span>Roshen Shanilka</span></div>
-                  <div className="detail-item"><span className="detail-label">Location:</span><span>Kochchikade, Sri Lanka</span></div>
-                  <div className="detail-item"><span className="detail-label">Email:</span><span>roshenshanilka123@gmail.com</span></div>
-                  <div className="detail-item"><span className="detail-label">Status:</span><span className="status-open">Open for Freelance</span></div>
+
+                <div className="about-details" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginTop: "40px" }}>
+                  <div>
+                    <span className="detail-label" style={{ display: "block", fontSize: "0.75rem", color: "var(--accent2)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "4px" }}>Name:</span>
+                    <span style={{ fontWeight: "600" }}>Roshen Shanilka</span>
+                  </div>
+                  <div>
+                    <span className="detail-label" style={{ display: "block", fontSize: "0.75rem", color: "var(--accent2)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "4px" }}>Location:</span>
+                    <span style={{ fontWeight: "600" }}>Kochchikade, Sri Lanka</span>
+                  </div>
+                  <div>
+                    <span className="detail-label" style={{ display: "block", fontSize: "0.75rem", color: "var(--accent2)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "4px" }}>Email:</span>
+                    <span style={{ fontWeight: "600", fontSize: "0.9rem" }}>roshenshanilka123@gmail.com</span>
+                  </div>
+                  <div>
+                    <span className="detail-label" style={{ display: "block", fontSize: "0.75rem", color: "var(--accent2)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "4px" }}>Status:</span>
+                    <span style={{ fontWeight: "600", color: "#4ade80" }}>Open for Freelance</span>
+                  </div>
                 </div>
-                <div className="about-actions">
-                  <a href="/roshen-resume.pdf" target="_blank" className="btn btn-primary">Download Resume</a>
-                  <div className="social-links">
-                    <a href="https://wa.me/94770106368" target="_blank" className="social-btn" aria-label="WhatsApp">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "20px", marginTop: "40px", flexWrap: "wrap" }}>
+                  <a href="/roshen-resume.pdf" download="Roshen_Shanilka_Resume.pdf" className="btn btn-primary">Download Resume</a>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <a href="https://wa.me/94770106368" className="social-btn" aria-label="WhatsApp">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.432h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
                     </a>
-                    <a href="https://www.facebook.com/roshen.shanilka.2025" target="_blank" className="social-btn" aria-label="Facebook">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                    <a href="https://facebook.com/roshen.shanilka" className="social-btn" aria-label="Facebook">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
                     </a>
-                    <a href="https://www.instagram.com/__mr.roshe__?igsh=Y3lnNTk4MzMwNndr" target="_blank" className="social-btn" aria-label="Instagram">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.42.42.68.819.896 1.377.163.422.358 1.057.412 2.227.059 1.266.071 1.646.071 4.85s-.012 3.584-.071 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.42-.819.68-1.377.896-.422.163-1.057.358-2.227.412-1.266.059-1.646.071-4.85.071s-3.584-.012-4.85-.071c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.42-.42-.68-.819-.896-1.377-.163-.422-.358-1.057-.412-2.227-.059-1.266-.071-1.646-.071-4.85s.012-3.584.071-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.42.819-.68 1.377-.896.422-.163 1.057-.358 2.227-.412 1.266-.059 1.646-.071 4.85-.071M12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913a5.921 5.921 0 001.384 2.126A5.921 5.921 0 004.14 23.37c.766.296 1.637.499 2.913.558 1.28.058 1.689.072 4.947.072s3.667-.014 4.947-.072c1.277-.06 2.148-.261 2.913-.558a5.921 5.921 0 002.126-1.384 5.921 5.921 0 001.384-2.126c.296-.765.499-1.636.558-2.913.058-1.28.072-1.689.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.261-2.148-.558-2.913a5.921 5.921 0 00-1.384-2.126A5.921 5.921 0 0019.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.014 15.259 0 12 0m0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324M12 16a4 4 0 110-8 4 4 0 010 8m6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0" /></svg>
+                    <a href="https://instagram.com/roshen.shanilka" className="social-btn" aria-label="Instagram">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.019 1.575 20.35.935 19.56.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.584-.071 4.85c-.055 1.17-.249 1.805-.415 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.015-4.85-.07c-1.17-.055-1.805-.249-2.227-.415-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.016-3.584.072-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.265-.057 1.645-.07 4.85-.07zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="about-cards-col">
-              <div className="mini-card glass-card reveal">
-                <div className="mini-card-icon">🎓</div>
-                <h3>Education</h3>
-                <p>National Cert. in ICT<br /><span>Don Bosco Technical – 2020</span></p>
-              </div>
-              <div className="mini-card glass-card reveal">
-                <div className="mini-card-icon">🏆</div>
-                <h3>Certifications</h3>
-                <p>NVQ Level 3 & 4 (Dip)<br />Hardware & Networking<br />Creative Design</p>
-              </div>
-              <div className="mini-card glass-card reveal">
-                <div className="mini-card-icon">🚁</div>
-                <h3>Hobbies</h3>
-                <p>Photography<br />Drone Cinematography<br />Tech Exploring</p>
-              </div>
+
+            <div className="about-cards-col reveal" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <AboutMetaCard icon="🎓" title="Education" text={<>National Cert. in ICT<br />Don Bosco Technical - 2020</>} />
+              <AboutMetaCard icon="🏆" title="Certifications" text={<>NVQ Level 3 & 4 (Dip)<br />Hardware & Networking<br />Creative Design</>} />
+              <AboutMetaCard icon="🚁" title="Hobbies" text={<>Photography<br />Drone Cinematography<br />Tech Exploring</>} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── SKILLS ── */}
       <section id="skills" className="section skills-section">
         <div className="section-inner">
           <div className="section-header reveal">
             <span className="section-tag">Expertise</span>
             <h2 className="section-title">My Tech <span className="gradient-text">Stack</span></h2>
-            <p className="section-subtitle">Professional tools and technical proficiency</p>
           </div>
-
           <div className="skills-tabs reveal">
-            {[{ id: "design", label: "Design & Creative" }, { id: "it", label: "IT & Networking" }, { id: "web", label: "Web & Social" }, { id: "photo", label: "Photography" }].map(tab => (
-              <button
-                key={tab.id}
-                className={`tab-btn ${activeTab === tab.id ? "active" : ""}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
+            {["design", "it", "web", "photo"].map(id => (
+              <button key={id} className={`tab-btn ${activeTab === id ? "active" : ""}`} onClick={() => setActiveTab(id)}>
+                {id.toUpperCase()}
               </button>
             ))}
           </div>
-
-          <div className="skills-panels reveal">
-            <div className="skills-panel active">
-              <div className="skills-grid">
-                {activeTab === "design" && (
-                  <>
-                    <SkillChip name="Photoshop" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" level={95} />
-                    <SkillChip name="Illustrator" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" level={90} />
-                    <SkillChip name="Premiere Pro" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg" level={85} />
-                    <SkillChip name="After Effects" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg" level={80} />
-                    <SkillChip name="Canva Expert" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" level={90} />
-                    <SkillChip name="UI/UX Design" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" level={88} />
-                  </>
-                )}
-                {activeTab === "it" && (
-                  <>
-                    <SkillChip name="OS Management" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" level={92} />
-                    <SkillChip name="Hardware Troubleshooting" emoji="⚙️" level={90} />
-                    <SkillChip name="Cisco Networking" emoji="🌐" level={88} />
-                    <SkillChip name="CCTV & Surveillance" emoji="🎥" level={85} />
-                    <SkillChip name="Cloud Services" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" level={84} />
-                    <SkillChip name="Office Peripherals" emoji="🖨️" level={80} />
-                  </>
-                )}
-                {activeTab === "web" && (
-                  <>
-                    <SkillChip name="WordPress" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" level={85} />
-                    <SkillChip name="Web Building" icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" level={82} />
-                    <SkillChip name="Social Media Management" emoji="📱" level={90} />
-                    <SkillChip name="Digital Marketing" emoji="📈" level={88} />
-                  </>
-                )}
-                {activeTab === "photo" && (
-                  <>
-                    <SkillChip name="DSLR Photography" emoji="📷" level={92} />
-                    <SkillChip name="Drone Piloting" emoji="🎮" level={88} />
-                    <SkillChip name="Lighting & Composition" emoji="🕯️" level={90} />
-                    <SkillChip name="Video Production" emoji="✂️" level={85} />
-                  </>
-                )}
-              </div>
-            </div>
+          <div className="skills-grid reveal">
+            {skills.filter(s => s.category === activeTab).map(skill => (
+              <SkillChip key={skill.id} {...skill} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── PROJECTS ── */}
       <section id="projects" className="section projects-section">
         <div className="section-inner">
           <div className="section-header reveal">
             <span className="section-tag">Portfolio</span>
             <h2 className="section-title">Creative <span className="gradient-text">Showcase</span></h2>
-            <p className="section-subtitle">A collection of my recent works across different fields</p>
           </div>
           <div className="projects-filter reveal">
-            {[{ id: "all", label: "All" }, { id: "web", label: "Websites" }, { id: "design", label: "Design" }, { id: "it", label: "IT Projects" }, { id: "photo", label: "Photography" }].map(f => (
-              <button
-                key={f.id}
-                className={`filter-btn ${projectFilter === f.id ? "active" : ""}`}
-                onClick={() => setProjectFilter(f.id)}
-              >
-                {f.label}
+            {["all", "design", "it", "photo", "web"].map(f => (
+              <button key={f} className={`filter-btn ${projectFilter === f ? "active" : ""}`} onClick={() => setProjectFilter(f)}>
+                {f === "all" ? "All" : f.toUpperCase()}
               </button>
             ))}
           </div>
@@ -657,156 +436,83 @@ export default function Portfolio() {
                 key={p.id}
                 project={p}
                 index={i}
-                onViewGallery={() => {
-                  setSelectedProject(p);
-                  setGalleryIndex(0);
-                }}
+                onViewGallery={() => { setSelectedProject(p); setGalleryIndex(0); }}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── EXPERIENCE ── */}
       <section id="experience" className="section experience-section">
         <div className="section-inner">
           <div className="section-header reveal">
             <span className="section-tag">Experience</span>
             <h2 className="section-title">My Technical <span className="gradient-text">Path</span></h2>
-            <p className="section-subtitle">Professional history from hardware to coordination</p>
           </div>
           <div className="timeline">
-            <TimelineItem
-              title="IT Coordinator"
-              company="St. Nicholas’ International College · Negombo"
-              date="Oct 2024 – Present"
-              tasks={["Manage and maintain complete school IT infrastructure, servers, and smart classrooms", "Oversee data security, backups, and CCTV systems with 99% uptime", "Provide high-level technical support for 50+ staff and 500+ students"]}
-              tags={["Infrastructure", "Networking", "EdTech", "Security"]}
-            />
-            <TimelineItem
-              title="Senior Graphic Designer"
-              company="Souvenir Books & Advertisements · Freelance"
-              date="Oct 2024 – Present"
-              tasks={["Design professional souvenir books, event magazines, and high-impact brochures", "Create complete branding identities for local businesses and social media campaigns", "Handle photo editing and print-ready file preparation for offset printing"]}
-              tags={["Photoshop", "Illustrator", "Branding", "Print Media"]}
-            />
-            <TimelineItem
-              title="Hardware & CCTV Technician"
-              company="Nawaloka Hospital · Sri Lanka"
-              date="2021 – 2023"
-              tasks={["Maintained hospital-wide computer networks and hardware systems", "Installed and configured high-end CCTV surveillance systems with remote monitoring", "Troubleshot complex hardware failures and performed component-level repairs"]}
-              tags={["Hardware", "CCTV", "MicroTech", "Repair"]}
-            />
-            <TimelineItem
-              title="Computer/Laptop Technician"
-              company="MicroTech Computers · Sri Lanka"
-              date="2019 – 2021"
-              tasks={["Diagnosed and replicated complex laptop motherboard issues", "Performed precision soldering and component replacement using microscope equipment", "Managed repair and maintenance for hundreds of consumer laptops"]}
-              tags={["Soldering", "Diagnostics", "Motherboards", "Laptop Repair"]}
-            />
+            {experience.map(item => (
+              <TimelineItem key={item.id} {...item} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── REFERENCES ── */}
       <section id="references" className="section references-section">
         <div className="section-inner">
           <div className="section-header reveal">
             <span className="section-tag">References</span>
             <h2 className="section-title">Professional <span className="gradient-text">Endorsements</span></h2>
-            <p className="section-subtitle">Verified professional references from my career journey</p>
           </div>
           <div className="references-grid">
-            <div className="reference-card glass-card reveal">
-              <div className="reference-quote">“</div>
-              <div className="reference-body">
-                <p>Roshen has consistently demonstrated high levels of technical proficiency and dedication in his role as IT Coordinator at St. Nicholas' International College.</p>
-              </div>
-              <div className="reference-footer">
-                <div className="ref-info">
-                  <h3>Rev. Fr. Anthony Lakshman</h3>
-                  <p>Rector/Principal</p>
-                  <p className="ref-org">St. Nicholas' International College</p>
-                  <div className="ref-contact">
-                    <span>📞 +94 71 354 75 23</span>
+            {endorsements.map(en => (
+              <div key={en.id} className="reference-card glass-card reveal">
+                <div className="reference-quote">“</div>
+                <div className="reference-body"><p>{en.message}</p></div>
+                <div className="reference-footer">
+                  <div className="ref-info">
+                    <h3>{en.name}</h3><p>{en.role} · {en.company}</p>
+                    {en.phone && <div className="ref-contact">📞 {en.phone}</div>}
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="reference-card glass-card reveal">
-              <div className="reference-quote">“</div>
-              <div className="reference-body">
-                <p>A reliable and skilled technician who maintained our hospital systems with great care and professional integrity.</p>
-              </div>
-              <div className="reference-footer">
-                <div className="ref-info">
-                  <h3>R. A. Wasantha</h3>
-                  <p>Network Administrator</p>
-                  <p className="ref-org">Nawaloka Hospital l Sri Lanka</p>
-                  <div className="ref-contact">
-                    <span>📞 +94 71 718 64 05</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── CONTACT ── */}
       <section id="contact" className="section contact-section">
         <div className="section-inner">
           <div className="section-header reveal">
             <span className="section-tag">Contact</span>
             <h2 className="section-title">Let&apos;s <span className="gradient-text">Work Together</span></h2>
-            <p className="section-subtitle">Ready to bring your IT vision or design project to life.</p>
           </div>
           <div className="contact-grid">
             <div className="contact-info reveal">
-              <div className="contact-card glass-card">
-                <div className="contact-icon">📧</div>
-                <h3>Email</h3>
-                <p>roshenshanilka123@gmail.com</p>
-              </div>
-              <div className="contact-card glass-card">
-                <div className="contact-icon">📞</div>
-                <h3>Phone</h3>
-                <p>+94 77 010 63 68</p>
-              </div>
-              <div className="contact-card glass-card">
-                <div className="contact-icon">📍</div>
-                <h3>Location</h3>
-                <p>Kochchikade, Sri Lanka</p>
-              </div>
+              <ContactCard icon="📧" title="Email" val="roshenshanilka123@gmail.com" />
+              <ContactCard icon="📞" title="Phone" val="+94 77 010 63 68" />
+              <ContactCard icon="📍" title="Location" val="Kochchikade, Sri Lanka" />
             </div>
             <form className="contact-form glass-card reveal" onSubmit={handleContactSubmit}>
               <h3>Send a Message</h3>
               <div className="form-row">
                 <div className="form-group">
-                  <label>Your Name</label>
                   <input type="text" placeholder="Name" required />
                 </div>
                 <div className="form-group">
-                  <label>Your Email</label>
                   <input type="email" placeholder="Email" required />
                 </div>
               </div>
               <div className="form-group">
-                <label>Subject</label>
-                <input type="text" placeholder="What is this about?" required />
-              </div>
-              <div className="form-group">
-                <label>Message</label>
-                <textarea rows={5} placeholder="Your requirements..." required></textarea>
+                <textarea rows={6} placeholder="Your Message" required style={{ resize: "none" }} />
               </div>
               <button type="submit" className="btn btn-primary form-submit" disabled={formStatus === "sending"}>
-                <span>{formStatus === "sending" ? "Sending..." : "Send Message"}</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "18px", height: "18px", marginLeft: "8px" }}>
-                  <line x1="22" y1="2" x2="11" y2="13" />
-                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
+                {formStatus === "sending" ? "Sending..." : "Send Message"}
               </button>
-              {formStatus === "success" && <div className="form-success show">✅ Message sent! I&apos;ll get back to you shortly.</div>}
+              {formStatus === "success" && (
+                <div className="form-success show">
+                  <span>✅</span> Message sent successfully! I&apos;ll get back to you soon.
+                </div>
+              )}
             </form>
           </div>
         </div>
@@ -815,80 +521,55 @@ export default function Portfolio() {
       <footer className="footer">
         <div className="footer-inner">
           <a href="#home" className="nav-logo"><span className="accent">&lt;</span>RS<span className="accent">/&gt;</span></a>
-          <p className="footer-copy">© 2026 Roshen Shanilka. Professional Portfolio.</p>
-          <div className="footer-links">
-            <a href="#about">About</a><a href="#projects">Work</a><a href="#contact">Contact</a>
-          </div>
+          <p>© 2026 Roshen Shanilka. Fully Database Driven.</p>
         </div>
       </footer>
 
-      <button className={`back-to-top ${showBackToTop ? "show" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>↑</button>
-
-      {/* ── GALLERY MODAL ── */}
       {selectedProject && (
         <div className="gallery-modal" onClick={() => setSelectedProject(null)}>
           <div className="gallery-content" onClick={e => e.stopPropagation()}>
             <button className="close-gallery" onClick={() => setSelectedProject(null)}>&times;</button>
             <div className="gallery-main">
-              {(selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image!).endsWith('.mp4') ? (
-                <video
-                  key={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image!}
-                  src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image}
-                  controls
-                  autoPlay
-                  loop
-                  className="gallery-video"
-                />
+              {((selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image) || "").endsWith(".mp4") ? (
+                <video src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image || ""} controls autoPlay loop className="gallery-video" />
               ) : (
-                <img src={selectedProject.gallery?.[galleryIndex] ?? selectedProject.image!} alt={selectedProject.title} />
-              )}
-              {selectedProject.gallery && selectedProject.gallery.length > 1 && (
-                <>
-                  <button className="gallery-nav prev" onClick={() => setGalleryIndex((galleryIndex - 1 + selectedProject.gallery.length) % selectedProject.gallery.length)}>&#10094;</button>
-                  <button className="gallery-nav next" onClick={() => setGalleryIndex((galleryIndex + 1) % selectedProject.gallery.length)}>&#10095;</button>
-                </>
+                <img src={selectedProject.gallery ? selectedProject.gallery[galleryIndex] : selectedProject.image || ""} alt={selectedProject.title} />
               )}
             </div>
-            {selectedProject.gallery && (
+            {selectedProject.gallery && selectedProject.gallery.length > 1 && (
               <div className="gallery-thumbs">
-                {selectedProject.gallery!.map((img: string, idx: number) => (
-                  <div
-                    key={idx}
-                    className={`thumb ${idx === galleryIndex ? "active" : ""}`}
-                    onClick={() => setGalleryIndex(idx)}
-                  >
-                    {img.endsWith('.mp4') ? (
-                      <div className="video-thumb-placeholder">📹</div>
-                    ) : (
-                      <img src={img} alt="thumb" />
-                    )}
+                {selectedProject.gallery.map((url, idx) => (
+                  <div key={idx} className={`thumb ${idx === galleryIndex ? "active" : ""}`} onClick={() => setGalleryIndex(idx)}>
+                    {url.endsWith(".mp4") ? "📹" : <img src={url} alt="thumb" />}
                   </div>
                 ))}
               </div>
             )}
-            <div className="gallery-info">
-              <h3>{selectedProject.title}</h3>
-              <p>{selectedProject.desc}</p>
-            </div>
           </div>
         </div>
       )}
-
-      {/* Hero Image Mask Definition */}
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <clipPath id="blob-mask" clipPathUnits="objectBoundingBox">
-            <path d="M0.2,0.1 C0.5,-0.1 0.9,0.1 0.95,0.4 C1,0.7 0.8,0.95 0.5,1 C0.2,1.05 0,0.85 0,0.5 C0,0.2 0.1,0.15 0.2,0.1" />
-          </clipPath>
-        </defs>
-      </svg>
     </>
   );
 }
 
-// ── SUB-COMPONENTS ───────────────────────────────────
+// ── UTILS ───────────────────────────────────────────
+function AboutMetaCard({ icon, title, text }: { icon: string, title: string, text: React.ReactNode }) {
+  return (
+    <div className="glass-card revelation" style={{ padding: "24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", border: "1px solid var(--border)" }}>
+      <div style={{ fontSize: "2rem" }}>{icon}</div>
+      <h3 style={{ fontSize: "1.1rem", fontWeight: "700" }}>{title}</h3>
+      <div style={{ fontSize: "0.85rem", color: "var(--text-dim)", lineHeight: "1.6" }}>{text}</div>
+    </div>
+  );
+}
 
-function SkillChip({ name, icon, emoji, level }: { name: string, icon?: string, emoji?: string, level: number }) {
+function StatItem({ num, label }: { num: number, label: string }) {
+  return (<div className="stat"><div><span className="stat-num">{num}</span><span className="stat-plus">+</span></div><span className="stat-label">{label}</span></div>);
+}
+function DetailItem({ label, val }: { label: string, val: string }) {
+  return (<div className="detail-item"><span className="detail-label">{label}:</span><span>{val}</span></div>);
+}
+function SkillChip({ name, icon, emoji, level }: Skill) {
   return (
     <div className="skill-chip reveal">
       {icon ? <img src={icon} alt={name} /> : <span style={{ fontSize: "2rem" }}>{emoji}</span>}
@@ -897,62 +578,45 @@ function SkillChip({ name, icon, emoji, level }: { name: string, icon?: string, 
     </div>
   );
 }
-
-function ProjectCard({ project, index, onViewGallery }: { project: Project, index: number, onViewGallery?: () => void }) {
-  const badgeClass: Record<string, string> = { web: "badge-web", design: "badge-mobile", it: "badge-cloud", photo: "badge-ai" };
+function ProjectCard({ project, index, onViewGallery }: { project: Project, index: number, onViewGallery: () => void }) {
   const badgeLabel: Record<string, string> = { web: "Website", design: "Graphic Design", it: "IT Project", photo: "Photography" };
-
-  const currentBadgeClass = badgeClass[project.category] || "badge-web";
   const currentBadgeLabel = badgeLabel[project.category] || "Project";
   return (
-    <div className="project-card reveal" style={{ transitionDelay: `${index * 0.07}s` }}>
-      <div className="project-thumb" style={{
-        background: project.image ? `url('${project.image}') center/cover no-repeat` : project.gradient
-      }}>
-        {!project.image && <span style={{ fontSize: "4rem" }}>{project.emoji}</span>}
+    <div className="project-card reveal" style={{ transitionDelay: `${index * 0.05}s` }}>
+      <div className="project-thumb" style={{ background: project.image ? `url('${project.image}') center/cover no-repeat` : (project.gradient || "gray") }}>
+        {!project.image && <span style={{ fontSize: "4.5rem", opacity: 0.8 }}>{project.emoji}</span>}
         <div className="project-overlay">
-          {project.gallery ? (
-            <button className="proj-link live" onClick={onViewGallery}>View Works</button>
-          ) : project.image ? (
-            <a href={project.live} target="_blank" className="proj-link live">View Work</a>
-          ) : (
-            <a href="#" className="proj-link live">View Project</a>
-          )}
-          <a href="#" className="proj-link code">Details</a>
+          <button className="proj-link live" onClick={onViewGallery}>{project.gallery?.length ? "View Gallery" : "View Details"}</button>
+          {project.liveUrl && <a href={project.liveUrl} target="_blank" className="proj-link code">Live Site</a>}
         </div>
       </div>
       <div className="project-body">
-        <span className={`proj-badge ${currentBadgeClass}`}>{currentBadgeLabel}</span>
+        <span className="proj-badge">{currentBadgeLabel}</span>
         <h3 className="project-title">{project.title}</h3>
-        <p className="project-desc">{project.desc}</p>
-        <div className="project-tags">
-          {project.tags.map((t: string) => <span key={t}>{t}</span>)}
-        </div>
+        <p className="project-desc">{project.description}</p>
+        <div className="project-tags">{project.tags.map(t => <span key={t}>{t}</span>)}</div>
       </div>
     </div>
   );
 }
-
-interface TimelineItemProps {
-  title: string;
-  company: string;
-  date: string;
-  tasks: string[];
-  tags: string[];
-}
-
-function TimelineItem({ title, company, date, tasks, tags }: TimelineItemProps) {
+function TimelineItem({ title, company, dateRange, tasks, tags }: ExperienceItem) {
   return (
     <div className="timeline-item reveal">
-      <div className="timeline-dot"></div>
+      <div className="timeline-dot" />
       <div className="timeline-card glass-card">
         <div className="tl-header">
           <div><h3 className="tl-title">{title}</h3><p className="tl-company">{company}</p></div>
-          <span className="tl-date">{date}</span>
+          <span className="tl-date">{dateRange}</span>
         </div>
-        <ul className="tl-list">{tasks.map((t: string) => <li key={t}>{t}</li>)}</ul>
-        <div className="tl-tags">{tags.map((t: string) => <span key={t}>{t}</span>)}</div>
+        <ul className="tl-list">{tasks.map(t => <li key={t}>{t}</li>)}</ul>
+        <div className="tl-tags">{tags.map(t => <span key={t}>{t}</span>)}</div>
       </div>
     </div>
   );
+}
+function ContactCard({ icon, title, val }: { icon: string, title: string, val: string }) {
+  return (<div className="contact-card glass-card reveal">
+    <div className="contact-icon" style={{ fontSize: "1.5rem" }}>{icon}</div>
+    <h3>{title}</h3><p>{val}</p>
+  </div>);
 }

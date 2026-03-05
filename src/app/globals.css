@@ -72,39 +72,8 @@ body {
   opacity: 0.5;
 }
 
-/* ── CUSTOM CURSOR ─────────────────────────────────── */
-.cursor,
-.cursor-follower {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transition: transform var(--transfast);
-}
+/* REMOVED: CUSTOM CURSOR STYLES */
 
-.cursor {
-  width: 10px;
-  height: 10px;
-  background: white;
-  transform: translate(-50%, -50%);
-}
-
-.cursor-follower {
-  width: 36px;
-  height: 36px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  transform: translate(-50%, -50%);
-  transition: transform 0.12s, left 0.1s, top 0.1s;
-}
-
-@media (pointer:coarse) {
-
-  .cursor,
-  .cursor-follower {
-    display: none;
-  }
-}
 
 /* ── GLASS CARD ────────────────────────────────────── */
 .glass-card {
@@ -1224,84 +1193,61 @@ body {
 
 .contact-form {
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .contact-form h3 {
   font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 28px;
+  margin-bottom: 8px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-dim);
+  width: 100%;
 }
 
 .form-group input,
 .form-group textarea {
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.04);
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-family: var(--font-sans);
-  transition: border-color var(--transfast), box-shadow var(--transfast);
-  resize: vertical;
+  transition: all var(--transfast);
   outline: none;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--accent1);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--text-dimmer);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.1);
 }
 
 .form-submit {
-  width: 100%;
-  justify-content: center;
-}
-
-.form-submit svg {
-  width: 18px;
-  height: 18px;
+  align-self: flex-start;
+  min-width: 200px;
 }
 
 .form-success {
-  display: none;
-  margin-top: 16px;
-  padding: 14px 20px;
+  margin-top: 10px;
+  padding: 16px;
   background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  border: 1px solid rgba(74, 222, 128, 0.2);
   border-radius: var(--radius-sm);
   color: #4ade80;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.form-success.show {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 0.92rem;
 }
 
 /* ════════════════ FOOTER ════════════════ */
