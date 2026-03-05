@@ -151,7 +151,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <>
-      <style jsx>{`
+      <style global jsx>{`
         .login-page {
           min-height: 100vh;
           display: flex;
