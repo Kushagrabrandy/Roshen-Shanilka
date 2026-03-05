@@ -77,7 +77,13 @@ export const creativeShowcaseCreateSchema = z.object({
   mediaUrl: z.string().url().optional().or(z.literal("")),
 });
 
+export const creativeShowcaseUpdateSchema = creativeShowcaseCreateSchema.partial();
+
 export const techPathCreateSchema = z.object({
   title: z.string().min(1).max(200),
   description: z.string().min(1).max(2000),
 });
+
+export const techPathUpdateSchema = techPathCreateSchema.partial();
+
+
